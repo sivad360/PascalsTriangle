@@ -2,7 +2,7 @@
 //Project: Pascal's Triangle
 //Class: Cs145
 //Project Description:
-//  See Test.java Header
+//  This Program Prints out a visual representation of pascals Triangle.
 //
 //File Description:
 //  The Triangle class contains the methods which create and modify all the
@@ -15,76 +15,103 @@ public class Triangle {
     // an int in that row. for example int Triangle[0] = [0,null,null, etc...]
     // and intTriangle[2]=[1,2,1,null,null,etc...]
 
-    private String[] stringTriangle; // a String representation of the int
-    // array above. Each row of int Triangle is turned into a formatted String.
-    //For example stringTriangle[0] = "  1 " stringTriangle[2] = "1 2 1 "
-
     int length; // number of rows in triangle
+
 
     public Triangle(int count) { // constructor takes int representing length
     // of triangle initializes intTriangle and stringTriangle
 
         length = count;
 
-        intTriangle = new int[length][length];
+        intTriangle = new int[length][];
 
-        intTriangle[0][0] = 1; // first row will always just be 1 and must
-        // always be created
+        for(int h = 0; h < intTriangle.length; h ++){
+            intTriangle[h] = new int[h+1];
+        }
 
         int[] oldRow = intTriangle[0];
 
+        oldRow[0] = 1; // first row will always just be 1 and must
+        // always be created
+
         int[] newRow = intTriangle[1];
 
-        for(int i = 0; i < length; i++) { // iterate through each row of intTriangle
+        newRow[0] = 1;
+        newRow[1] = 1;
+
+        for(int i = 1; i < length; i++) { // iterate through each row of intTriangle
 
             newRow[0] = 1; // first int of any row is always 1
 
-            newRow[newRow.length-1] = 1; // last int of any row is always 1
-
-            for(int j = 1; j < oldRow.length-1; j++) { // iterate through each
+            for(int j = 1; j < oldRow.length; j++) { // iterate through each
             // index of newRow adding two ints of indexes above in oldRow;
 
                 newRow[j] = oldRow[j-1] + oldRow[j];
 
             }
 
+            newRow[newRow.length-1] = 1;
 
             oldRow = newRow;
-            newRow = intTriangle[i+2];
 
+
+            if(i < length-1){
+            newRow = intTriangle[i+1];
+            }
             
         }
 
     }
 
-    public String row(int[] currentRow){ // takes an array of ints representing
-    // one row of the triangle and returns a formatted string of that row. 
+    public void print() { // method to print formatted triangle to terminal.
 
-        int count = 0;
+        int fenceSpace = length*4;
 
-        int[] newRow = new int[currentRow.length+1];
+        for(int[] intarray: intTriangle){ // iterates through rows of triangle
 
-        newRow[0] = 1;
-        
-        newRow[newRow.length-1] = 1;
+            fenceSpace = fenceSpace - 2;
 
-        for(int i = 1; i <newRow.length-1; i=i+2) {
+            // if(intarray.length == 5){
+            //     fenceSpace -- ;
+            // }
+            if(intarray.length > 5){
+                fenceSpace -- ;
+            }
 
-            newRow[i] = currentRow[i]+currentRow[i-1];
+            for(int i = 0; i < fenceSpace; i++){ 
 
+                System.out.print(" ");
+            }
+
+            for(int j = 0; j < intarray.length; j++){ // iterate through indexes of rows 
+
+                int currentInt = intarray[j];
+
+                if(currentInt != 1){ // used to check position in row
+                    int newInt = intarray[j+1];
+                    int additionInt = currentInt + newInt;
+
+                    if(additionInt == intarray.length && j < intarray.length-3){
+                        // formatting for spaces in ints of different lengths
+                        System.out.print("     ");
+                    } else  if(additionInt>100000 ){
+                        System.out.print("     ");
+                    }
+                     else {
+                        System.out.print("   ");
+                    }
+
+                } else {
+                    System.out.print("   ");
+                
+                }
+
+
+                System.out.print(currentInt);
+
+            }
+            System.out.println();
         }
 
-        row(newRow);
-
-        count++;
-
     }
-
-    public void print() {
-
-        for(int)
-
-    }
-
-
 }

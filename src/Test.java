@@ -3,7 +3,7 @@
 //Class: Cs145
 //Project Description:
 //  This Program Prints out a visual representation of pascals Triangle.
-//
+
 //File Description:
 //  Test class contains PVSM calls from menu and triangle classes.
 
@@ -15,7 +15,8 @@ public class Test {
 
         while(true) { 
 
-            Triangle triangle = new Triangle(Menu.main());
+            Triangle triangle = new Triangle(Menu.main()); 
+            triangle.print();
 
         }
 

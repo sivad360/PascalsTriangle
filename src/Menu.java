@@ -24,14 +24,30 @@ public class Menu {
 
     }
 
+
+
     public static int main(){ // method which prompts for and returns int
     // representing the desired length of Pascal's triangle. 
 
         Scanner input = new Scanner(System.in);
 
+        System.out.printf("%s%n", "please enter 'c' to continue or 'q' to close the program");
+
+        char inputChar = input.nextLine().charAt(0);
+
+        int length = 0;
+
+        if(inputChar == 'c') {
+
         System.out.printf("%s%n", "please enter the number of rows:");
 
-        int length = input.nextInt();
+        length = input.nextInt();
+
+        return length;
+
+        } else if( inputChar == 'q') {
+            System.exit(0);
+        }
 
         return length;
 
