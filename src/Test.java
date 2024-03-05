@@ -13,7 +13,7 @@ public class Test {
 
         Menu.welcome(); // Print out welcome message 
 
-        while(true) { 
+        while(true) { // continously call, prompt and print new triangle unless quit.
 
             Triangle triangle = new Triangle(Menu.main()); 
             triangle.print();
